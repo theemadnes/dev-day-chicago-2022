@@ -1,0 +1,16 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - "github.com/GoogleCloudPlatform/kubernetes-engine-samples/whereami/k8s/"
+  - hpa.yaml
+nameSuffix: -v1
+patches:
+  - service-patch.yaml
+  - configmap-patch.yaml
+patchesJson6902:
+  - target:
+      group: ""
+      version: v1
+      kind: Service
+      name: whereami-v1
+    path: service-name-patch.yaml
